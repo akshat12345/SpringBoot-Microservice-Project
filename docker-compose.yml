@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+
+    authorization-service:
+        image: mfpe/authorization-service:0.0.1-SNAPSHOT
+        ports: 
+            - "8084:8084"
+        restart: always
+        networks: 
+            - mfpe-network
+
+    medicine-stock-service:
+        image: mfpe/medicine-stock-service:0.0.1-SNAPSHOT
+        ports: 
+            - "8081:8081"
+        restart: always
+        depends_on:
+            - authorization-service
+        networks: 
+            - mfpe-network
+
+    medical-representative-schedule-service:
+        image: mfpe/medical-representative-schedule-service:0.0.1-SNAPSHOT
+        ports: 
+            - "8082:8082"
+        restart: always
+        depends_on:      
+            - authorization-service
+            - medicine-stock-service
+        networks: 
+            - mfpe-network
+  
+    pharmacy-supply-service:
+        image: mfpe/pharmacy-supply-service:0.0.1-SNAPSHOT
+        ports:
+            - "8083:8083"
+        restart: always
+        depends_on:
+            - authorization-service
+            - medicine-stock-service
+        networks:
+            - mfpe-network
+
+# Networks to be created to faciliate communication between containers
+networks:
+    mfpe-network:
