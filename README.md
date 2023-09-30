@@ -1,4 +1,6 @@
 # SpringBoot-Microservice-Project
+Pharmacy Supply Management
+
 This project is based on Java Spring Boot Microservice architecture. The project has multiple different services, which focus on managing various functionalities of the pharmacy supply system. 
 
 Microservices Inside This Project - 
